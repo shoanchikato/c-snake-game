@@ -1,27 +1,27 @@
-#include "position.h"
 #include "include/raylib.h"
+#include "position.h"
 #include <stdbool.h>
 #include <stdlib.h>
 
 #ifndef SNAKE_H
 #define SNAKE_H
 
-typedef struct Snake {
+typedef struct {
   Position **body;
-  size_t *bodyLen;
+  size_t body_len;
   Position *direction;
-  float *lastUpdatedTime;
-  bool canGrow;
+  double last_updated_time;
+  bool can_grow;
 } Snake;
 
-Snake *SnakeInit();
+Snake *snake_init();
 
-void SnakeDraw(Snake *snake);
+void snake_draw(Snake *snake);
 
-void SnakeGetDirection(Snake *snake);
+void snake_get_direction(Snake *snake);
 
-void SnakeMovement(Snake *snake);
+void snake_movment(Snake *snake);
 
-void SnakeUpdate(Snake *snake);
+void snake_update(Snake *snake);
 
 #endif

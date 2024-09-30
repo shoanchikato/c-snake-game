@@ -6,8 +6,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-Game *GameInit(Snake *snake, Food *food) {
-  Game *game = (Game*) malloc(sizeof(Game));
+Game *game_init(Snake *snake, Food *food) {
+  Game *game = (Game*) calloc(1, sizeof(Game));
   if(game == NULL) {
     printf("Error allocating memory for game");
     exit(1);
@@ -20,21 +20,21 @@ Game *GameInit(Snake *snake, Food *food) {
   return game;
 }
 
-void GameUpdate(Game *g) {
-  SnakeUpdate(g->snake);
-  GameCheckCollision(g);
+void game_update(Game *g) {
+  snake_update(g->snake);
+  game_check_collision(g);
 }
 
-void GameDraw(Game *g) {
-  SnakeDraw(g->snake);
-  FoodDraw(g->food);
+void game_draw(Game *g) {
+  snake_draw(g->snake);
+  food_draw(g->food);
 }
 
-void GameCheckCollision(Game *g) {
+void game_check_collision(Game *g) {
   Position *a = g->snake->body[0];
   Position *b = g->food->position;
-  if (PositionEqual(a, b)) {
-    g->food->position = GetRandomPosAvoidCollision(g->snake->body, g->snake->bodyLen);
-    g->snake->canGrow = true;
+  if (position_equal(a, b)) {
+    g->food->position = get_random_pos_avoid_collision(g->snake->body, &g->snake->body_len);
+    g->snake->can_grow = true;
   }
 }

@@ -5,14 +5,16 @@
 #include <stdbool.h>
 #include "position.h"
 
-bool EventTriggered(double interval, float *lastUpdatedTime);
+bool event_triggered(double interval, float last_updated_time);
 
-bool ElementInBody(Position* element, Position** body, size_t* len);
+bool element_in_body(Position* element, Position** body, size_t* len);
 
-Position *GetRandomPos();
+Position *get_random_pos();
 
-Position *GetRandomPosAvoidCollision(Position **body, const size_t *len);
+Position *get_random_pos_avoid_collision(Position **body, const size_t *len);
 
-Texture2D GetTexture(char *filePath);
+Texture2D get_texture(const char *file_path);
+
+int random_between(int min, int max);
 
 #endif

@@ -14,6 +14,6 @@
 #define GREEN_N CLITERAL(Color){174, 204, 96, 255}
 #define DARKGREEN_N CLITERAL(Color){43, 51, 24, 255}
 
-#define SNAKESPEED 0.08f
+#define SNAKESPEED 0.1
 
 #endif // CONSTANTS_H

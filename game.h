@@ -5,17 +5,17 @@
 #include "food.h"
 #include "snake.h"
 
-typedef struct Game {
+typedef struct {
   Snake *snake;
   Food *food;
 } Game;
 
-Game *GameInit(Snake *snake, Food *food);
+Game *game_init(Snake *snake, Food *food);
 
-void GameUpdate(Game *g);
+void game_update(Game *g);
 
-void GameDraw(Game *g);
+void game_draw(Game *g);
 
-void GameCheckCollision(Game *g);
+void game_check_collision(Game *g);
 
 #endif

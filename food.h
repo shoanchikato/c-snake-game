@@ -4,20 +4,20 @@
 #include "position.h"
 #include "include/raylib.h"
 
-typedef struct Food {
+typedef struct {
   Position *position;
   Texture2D texture;
-  size_t *snakeBodyLen;
-  Position **snakeBody;
+  size_t *snake_body_len;
+  Position **snake_body;
 } Food;
 
-Food* FoodInit(
-  Position** snakeBody, 
-  size_t *snakeBodyLen
+Food* food_init(
+  Position **snake_body, 
+  size_t *snake_body_len
 );
 
-void FoodDraw(Food* food);
+void food_draw(Food* food);
 
-void FoodUpdate(Food* food);
+void food_update(Food* food);
 
 #endif

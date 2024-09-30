@@ -7,51 +7,44 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "include/array_op.h"
 
-Snake *SnakeInit() {
-  size_t *bodyLen = malloc(sizeof(size_t));
-  if(bodyLen == NULL) {
-    printf("Error allocating memory for bodyLen");
-    exit(1);
-    return NULL;
-  }
-  *bodyLen = 0;
-
-  bool canGrow = false;
+Snake *snake_init() {
+  size_t body_len = 0;
+  bool can_grow = false;
   Position **body = NULL;
 
-  Position *position1 = PositionInit(6, 9);
-  Position *position2 = PositionInit(5, 9);
-  Position *position3 = PositionInit(4, 9);
+  Position* position3 = position_init(6, 9);
+  Position* position2 = position_init(5, 9);
+  Position* position1 = position_init(4, 9);
   
-  AppendElement((void**)&body, bodyLen, &position1, sizeof(Position));
-  AppendElement((void**)&body, bodyLen, &position2, sizeof(Position));
-  AppendElement((void**)&body, bodyLen, &position3, sizeof(Position));
+  array_op_push_front((void**)&body, &body_len, &position1,  sizeof(Position*));
+  array_op_push_front((void**)&body, &body_len, &position2,  sizeof(Position*));
+  array_op_push_front((void**)&body, &body_len, &position3,  sizeof(Position*));
 
-  Position *direction = PositionInit(1, 0);
+  Position *direction = position_init(1, 0);
 
-  Snake *snake = (Snake*) malloc(sizeof(Snake));
+  Snake *snake = (Snake*) calloc(1, sizeof(Snake));
   if(snake == NULL) {
     printf("Error allocating memory for snake");
     exit(1);
     return NULL;
   }
 
-  float *lastUpdatedTime = malloc(sizeof(size_t));
-  *lastUpdatedTime = 0;
+  double last_updated_time = 0;
 
   snake->body = body;
-  snake->bodyLen = bodyLen;
+  snake->body_len = body_len;
   snake->direction = direction;
-  snake->canGrow = canGrow;
-  snake->lastUpdatedTime = lastUpdatedTime;
+  snake->can_grow = can_grow;
+  snake->last_updated_time = last_updated_time;
 
 
   return snake;
 }
 
-void SnakeDraw(Snake *snake) {
-  for(size_t i = 0; i < *snake->bodyLen; i++) {
+void snake_draw(Snake *snake) {
+  for(size_t i = 0; i < snake->body_len; i++) {
     DrawRectangleRounded(
       (Rectangle) {
         snake->body[i]->x*CELLSIZE,
@@ -66,7 +59,7 @@ void SnakeDraw(Snake *snake) {
   }
 }
 
-void SnakeGetDirection(Snake *snake) {
+void snake_get_direction(Snake *snake) {
   if (IsKeyPressed(KEY_UP) && snake->direction->y != 1) {
     snake->direction->x = 0;
     snake->direction->y = -1;
@@ -83,26 +76,22 @@ void SnakeGetDirection(Snake *snake) {
 }
 
 
-void SnakeMovement(Snake *snake) {
-  if (EventTriggered(SNAKESPEED, snake->lastUpdatedTime)) {
-    Position *cell = PositionAdd(snake->body[0], snake->direction);
-    AppendElement(
-      (void**)snake->body, 
-      snake->bodyLen, 
-      cell, 
-      sizeof(Position)
-    );
+void snake_movement(Snake *snake) {
+  if (event_triggered(3, snake->last_updated_time)) {
+    Position *cell = position_add(snake->body[0], snake->direction);
 
-    if (snake->canGrow) {
-      snake->canGrow = false;
+    array_op_push_front((void**)&snake->body,  &snake->body_len, &cell, sizeof(Position*));
+
+    if (snake->can_grow) {
+      snake->can_grow = false;
       return;
     }
 
-    RemoveFromBack((void**)snake->body, snake->bodyLen, sizeof(Position));
+    array_op_pop_back((void**)&snake->body, &snake->body_len, sizeof(Position*));
   }
 }
 
-void SnakeUpdate(Snake *snake) {
-    SnakeGetDirection(snake);
-    SnakeMovement(snake);
+void snake_update(Snake *snake) {
+    snake_get_direction(snake);
+    snake_movement(snake);
 }

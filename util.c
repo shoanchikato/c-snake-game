@@ -3,11 +3,12 @@
 #include "include/raymath.h"
 #include "position.h"
 #include <stddef.h>
+#include <stdlib.h>
 #include "util.h"
 
-bool ElementInBody(Position *element, Position **body, size_t *len) {
+bool element_in_body(Position *element, Position **body, size_t *len) {
   for(size_t i = 0; i < *len; i++) {
-    if (PositionEqual(element, body[i])) {
+    if (position_equal(element, body[i])) {
       return true;
     }
   }
@@ -15,31 +16,29 @@ bool ElementInBody(Position *element, Position **body, size_t *len) {
   return false;
 }
 
-bool EventTriggered(double interval, float *lastUpdatedTime) {
+bool event_triggered(double interval, float lastUpdatedTime) {
   double currentTime = GetTime();
-  if (currentTime - *lastUpdatedTime >= interval) {
-    *lastUpdatedTime = currentTime;
+  if (currentTime - lastUpdatedTime >= interval) {
+    lastUpdatedTime = currentTime;
     return true;
   }
   return false;
 }
 
-Position *GetRandomPos() {
-  float x = GetRandomValue(0, CELLCOUNT - 1);
-  float y = GetRandomValue(0, CELLCOUNT - 1);
+Position *get_random_pos() {
+  int x = (int) GetRandomValue(0, CELLCOUNT - 1);
+  int y = (int) GetRandomValue(0, CELLCOUNT - 1);
 
-  Position *pos = PositionInit(x, y);
-
-  return pos;
+  return position_init(x, y);
 }
 
-Position *GetRandomPosAvoidCollision(Position **body, const size_t *len) {
+Position *get_random_pos_avoid_collision(Position **body, const size_t *len) {
   while(true) {
-    Position *pos = GetRandomPos();
+    Position *pos = get_random_pos();
 
     bool collides = false;
     for(size_t i = 0; i < *len; i++) {
-      if (PositionEqual(pos, body[i])) {
+      if (position_equal(pos, body[i])) {
         collides = true;
         break;
       }
@@ -51,8 +50,8 @@ Position *GetRandomPosAvoidCollision(Position **body, const size_t *len) {
   }
 }
 
-Texture2D GetTexture(char *filePath) {
-  Image image = LoadImage(filePath);
+Texture2D get_texture(const char *file_path) {
+  Image image = LoadImage(file_path);
 
   int width = image.width / RESIZERATIO;
   int height = image.height / RESIZERATIO;
@@ -62,4 +61,8 @@ Texture2D GetTexture(char *filePath) {
   UnloadImage(image);
 
   return texture;
+}
+
+int random_between(int min, int max) {
+    return min + rand() % (max - min + 1);
 }

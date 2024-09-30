@@ -1,68 +1,44 @@
 #include "game.h"
 #include "include/raylib.h"
 #include "position.h"
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "constants.h"
 #include "snake.h"
 #include "food.h"
-
-// int main() {
-//     Position* a = PositionInit(2, 3);
-//     Position* b = PositionInit(1, 1);
-
-//     Position* c = PositionAdd(a, b);
-
-
-//     PositionPrint(c);
-//     size_t len = 0;
-//     Position** arr = NULL;
-
-//     AppendElement((void**)&arr, &len, &a, sizeof(Position));
-//     AppendElement((void**)&arr, &len, &b, sizeof(Position));
-//     AppendElement((void**)&arr, &len, &c, sizeof(Position));
-
-//     printf("LENGTH %zu\n", len);
-
-//     for (size_t i = 0; i < len; i++) {
-//         PositionPrint(arr[i]);
-//     }
-
-
-//     free(a);
-//     free(b);
-//     free(c);
-
-//     return 0;
-// }
+#include <stdbool.h>
 
 int main() {
+    // Seed the random number generator
+    srand(time(NULL));
+
     InitWindow(WIDTH, HEIGHT, "Retro Snake");
-    SetTargetFPS(60);
+    SetTargetFPS(30);
 
-    Snake *snake = SnakeInit();
-    Food *food = FoodInit(snake->body, snake->bodyLen);
+    Snake *snake = snake_init();
+    Food *food = food_init(snake->body, &snake->body_len);
 
-    Game *game = GameInit(snake, food);
+    Game *game = game_init(snake, food);
 
     while (!WindowShouldClose()) {
         BeginDrawing();
 
             // Update
-            GameUpdate(game);
+            game_update(game);
             
             // Draw
             ClearBackground(GREEN_N);
-            GameDraw(game);
+            game_draw(game);
 
         EndDrawing();
     }
 
     CloseWindow();
 
-    // free(snake);
-    // free(food);
-    // free(game);
+    free(snake);
+    free(food);
+    free(game);
 
     return 0;
 }
