@@ -32,7 +32,6 @@ Position* position_add(Position* a, Position* b) {
   if(p == NULL) {
     printf("Error allocating memory for position");
     exit(1);
-    return NULL;
   }
   
   p->x = a->x + b->x;

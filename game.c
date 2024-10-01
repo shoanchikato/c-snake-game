@@ -11,7 +11,6 @@ Game *game_init(Snake *snake, Food *food) {
   if(game == NULL) {
     printf("Error allocating memory for game");
     exit(1);
-    return NULL;
   }
 
   game->food = food;

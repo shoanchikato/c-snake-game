@@ -28,7 +28,6 @@ Snake *snake_init() {
   if(snake == NULL) {
     printf("Error allocating memory for snake");
     exit(1);
-
   }
 
   clock_t last_updated_time = clock();
@@ -38,7 +37,6 @@ Snake *snake_init() {
   snake->direction = direction;
   snake->can_grow = can_grow;
   snake->last_updated_time = last_updated_time;
-
 
   return snake;
 }
