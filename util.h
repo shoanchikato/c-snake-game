@@ -4,8 +4,9 @@
 #include "include/raylib.h"
 #include <stdbool.h>
 #include "position.h"
+#include <time.h>
 
-bool event_triggered(double interval, float last_updated_time);
+bool event_triggered(float seconds, clock_t *last_updated_time);
 
 bool element_in_body(Position* element, Position** body, size_t* len);
 

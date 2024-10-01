@@ -1,16 +1,16 @@
+#ifndef SNAKE_H
+#define SNAKE_H
+
 #include "include/raylib.h"
 #include "position.h"
 #include <stdbool.h>
 #include <stdlib.h>
-
-#ifndef SNAKE_H
-#define SNAKE_H
-
+#include <time.h>
 typedef struct {
   Position **body;
   size_t body_len;
   Position *direction;
-  double last_updated_time;
+  clock_t last_updated_time;
   bool can_grow;
 } Snake;
 

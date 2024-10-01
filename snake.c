@@ -28,10 +28,10 @@ Snake *snake_init() {
   if(snake == NULL) {
     printf("Error allocating memory for snake");
     exit(1);
-    return NULL;
+
   }
 
-  double last_updated_time = 0;
+  clock_t last_updated_time = clock();
 
   snake->body = body;
   snake->body_len = body_len;
@@ -77,7 +77,7 @@ void snake_get_direction(Snake *snake) {
 
 
 void snake_movement(Snake *snake) {
-  if (event_triggered(3, snake->last_updated_time)) {
+  if (event_triggered(SNAKESPEED, &snake->last_updated_time)) {
     Position *cell = position_add(snake->body[0], snake->direction);
 
     array_op_push_front((void**)&snake->body,  &snake->body_len, &cell, sizeof(Position*));

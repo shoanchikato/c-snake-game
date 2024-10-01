@@ -5,6 +5,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include "util.h"
+#include <time.h>
 
 bool element_in_body(Position *element, Position **body, size_t *len) {
   for(size_t i = 0; i < *len; i++) {
@@ -16,13 +17,24 @@ bool element_in_body(Position *element, Position **body, size_t *len) {
   return false;
 }
 
-bool event_triggered(double interval, float lastUpdatedTime) {
-  double currentTime = GetTime();
-  if (currentTime - lastUpdatedTime >= interval) {
-    lastUpdatedTime = currentTime;
-    return true;
-  }
-  return false;
+bool event_triggered(float seconds, clock_t *last_update_time) {
+    // Get the current time
+    clock_t current_time = clock();
+
+    // Convert the seconds into clock ticks
+    clock_t interval = (clock_t)(seconds * CLOCKS_PER_SEC);
+
+    // Calculate the time when the event should trigger
+    clock_t time_spent = *last_update_time + interval;
+
+    // Check if the current time is after the calculated time
+    if (current_time > time_spent) {
+        // Update the last update time to current time
+        *last_update_time = current_time;
+        return true;
+    }
+
+    return false;
 }
 
 Position *get_random_pos() {
