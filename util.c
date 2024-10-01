@@ -7,9 +7,9 @@
 #include "util.h"
 #include <time.h>
 
-bool element_in_body(Position *element, Position **body, size_t *len) {
+bool element_in_body(Position *element, Position *body, size_t *len) {
   for(size_t i = 0; i < *len; i++) {
-    if (position_equal(element, body[i])) {
+    if (position_equal(element, &body[i])) {
       return true;
     }
   }
@@ -44,13 +44,13 @@ Position *get_random_pos() {
   return position_init(x, y);
 }
 
-Position *get_random_pos_avoid_collision(Position **body, const size_t *len) {
+Position *get_random_pos_avoid_collision(Position *body, const size_t *len) {
   while(true) {
     Position *pos = get_random_pos();
 
     bool collides = false;
     for(size_t i = 0; i < *len; i++) {
-      if (position_equal(pos, body[i])) {
+      if (position_equal(pos, &body[i])) {
         collides = true;
         break;
       }

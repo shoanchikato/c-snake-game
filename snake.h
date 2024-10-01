@@ -7,9 +7,9 @@
 #include <stdlib.h>
 #include <time.h>
 typedef struct {
-  Position **body;
+  Position *body;
   size_t body_len;
-  Position *direction;
+  Position direction;
   clock_t last_updated_time;
   bool can_grow;
 } Snake;

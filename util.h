@@ -8,11 +8,11 @@
 
 bool event_triggered(float seconds, clock_t *last_updated_time);
 
-bool element_in_body(Position* element, Position** body, size_t* len);
+bool element_in_body(Position* element, Position* body, size_t* len);
 
 Position *get_random_pos();
 
-Position *get_random_pos_avoid_collision(Position **body, const size_t *len);
+Position *get_random_pos_avoid_collision(Position *body, const size_t *len);
 
 Texture2D get_texture(const char *file_path);
 

@@ -12,11 +12,11 @@
 Snake *snake_init() {
   size_t body_len = 0;
   bool can_grow = false;
-  Position **body = NULL;
+  Position *body = NULL;
 
-  Position* position3 = position_init(6, 9);
-  Position* position2 = position_init(5, 9);
-  Position* position1 = position_init(4, 9);
+  Position position3 = *position_init(6, 9);
+  Position position2 = *position_init(5, 9);
+  Position position1 = *position_init(4, 9);
   
   array_op_push_front((void**)&body, &body_len, &position1,  sizeof(Position*));
   array_op_push_front((void**)&body, &body_len, &position2,  sizeof(Position*));
@@ -34,7 +34,7 @@ Snake *snake_init() {
 
   snake->body = body;
   snake->body_len = body_len;
-  snake->direction = direction;
+  snake->direction = *direction;
   snake->can_grow = can_grow;
   snake->last_updated_time = last_updated_time;
 
@@ -45,8 +45,8 @@ void snake_draw(Snake *snake) {
   for(size_t i = 0; i < snake->body_len; i++) {
     DrawRectangleRounded(
       (Rectangle) {
-        snake->body[i]->x*CELLSIZE,
-        snake->body[i]->y*CELLSIZE,
+        snake->body[i].x*CELLSIZE,
+        snake->body[i].y*CELLSIZE,
         CELLSIZE,
         CELLSIZE
       }, 
@@ -58,25 +58,25 @@ void snake_draw(Snake *snake) {
 }
 
 void snake_get_direction(Snake *snake) {
-  if (IsKeyPressed(KEY_UP) && snake->direction->y != 1) {
-    snake->direction->x = 0;
-    snake->direction->y = -1;
-  } else if (IsKeyPressed(KEY_DOWN) && snake->direction->y != -1) {
-    snake->direction->x = 0;
-    snake->direction->y = 1;
-  } else if (IsKeyPressed(KEY_LEFT) && snake->direction->x != 1) {
-    snake->direction->x = -1;
-    snake->direction->y = 0;
-  } else if (IsKeyPressed(KEY_RIGHT) && snake->direction->x != -1) {
-    snake->direction->x = 1;
-    snake->direction->y = 0;
+  if (IsKeyPressed(KEY_UP) && snake->direction.y != 1) {
+    snake->direction.x = 0;
+    snake->direction.y = -1;
+  } else if (IsKeyPressed(KEY_DOWN) && snake->direction.y != -1) {
+    snake->direction.x = 0;
+    snake->direction.y = 1;
+  } else if (IsKeyPressed(KEY_LEFT) && snake->direction.x != 1) {
+    snake->direction.x = -1;
+    snake->direction.y = 0;
+  } else if (IsKeyPressed(KEY_RIGHT) && snake->direction.x != -1) {
+    snake->direction.x = 1;
+    snake->direction.y = 0;
   }
 }
 
 
 void snake_movement(Snake *snake) {
   if (event_triggered(SNAKESPEED, &snake->last_updated_time)) {
-    Position *cell = position_add(snake->body[0], snake->direction);
+    Position cell = *position_add(&snake->body[0], &snake->direction);
 
     array_op_push_front((void**)&snake->body,  &snake->body_len, &cell, sizeof(Position*));
 

@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 
-Food* food_init(Position **snake_body, size_t *len) {
+Food* food_init(Position *snake_body, size_t *len) {
     Texture2D t = get_texture("assets/graphics/food.png");
     Position *p = get_random_pos();
 
@@ -22,7 +22,7 @@ Food* food_init(Position **snake_body, size_t *len) {
     food->position = *p;
     food->texture = t;
     food->snake_body_len = *len;
-    food->snake_body = *snake_body;
+    food->snake_body = snake_body;
 
     return food;
 }
@@ -37,6 +37,6 @@ void food_draw(Food* food) {
 }
 
 void food_update(Food* food) {
-  Position *pos = get_random_pos_avoid_collision(&food->snake_body, &food->snake_body_len);
+  Position *pos = get_random_pos_avoid_collision(food->snake_body, &food->snake_body_len);
   food->position = *pos;
 }

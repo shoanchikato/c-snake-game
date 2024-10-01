@@ -12,7 +12,7 @@ typedef struct {
 } Food;
 
 Food* food_init(
-  Position **snake_body, 
+  Position *snake_body, 
   size_t *snake_body_len
 );
 
