@@ -31,9 +31,10 @@ void game_draw(Game *g) {
 
 void game_check_collision(Game *g) {
   Position *a = g->snake->body[0];
-  Position *b = g->food->position;
-  if (position_equal(a, b)) {
-    g->food->position = get_random_pos_avoid_collision(g->snake->body, &g->snake->body_len);
+  Position b = g->food->position;
+  if (position_equal(a, &b)) {
+    Position *pos = get_random_pos_avoid_collision(g->snake->body, &g->snake->body_len);
+    g->food->position = *pos;
     g->snake->can_grow = true;
   }
 }

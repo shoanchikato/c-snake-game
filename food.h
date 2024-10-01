@@ -5,10 +5,10 @@
 #include "include/raylib.h"
 
 typedef struct {
-  Position *position;
+  Position position;
   Texture2D texture;
-  size_t *snake_body_len;
-  Position **snake_body;
+  size_t snake_body_len;
+  Position *snake_body;
 } Food;
 
 Food* food_init(

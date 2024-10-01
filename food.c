@@ -19,10 +19,10 @@ Food* food_init(Position **snake_body, size_t *len) {
     }
 
     // Set food properties
-    food->position = p;
+    food->position = *p;
     food->texture = t;
-    food->snake_body_len = len;
-    food->snake_body = snake_body;
+    food->snake_body_len = *len;
+    food->snake_body = *snake_body;
 
     return food;
 }
@@ -30,12 +30,13 @@ Food* food_init(Position **snake_body, size_t *len) {
 void food_draw(Food* food) {
   DrawTexture(
     food->texture,
-    food->position->x*CELLSIZE,
-    food->position->y*CELLSIZE,
+    food->position.x*CELLSIZE,
+    food->position.y*CELLSIZE,
     WHITE
   );
 }
 
 void food_update(Food* food) {
-  food->position = get_random_pos_avoid_collision(food->snake_body, food->snake_body_len);
+  Position *pos = get_random_pos_avoid_collision(&food->snake_body, &food->snake_body_len);
+  food->position = *pos;
 }
