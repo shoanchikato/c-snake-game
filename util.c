@@ -38,8 +38,8 @@ bool event_triggered(float seconds, clock_t *last_update_time) {
 }
 
 Position *get_random_pos() {
-  int x = (int) GetRandomValue(0, CELLCOUNT - 1);
-  int y = (int) GetRandomValue(0, CELLCOUNT - 1);
+  int x = (int) random_between(0, CELLCOUNT - 1);
+  int y = (int) random_between(0, CELLCOUNT - 1);
 
   return position_init(x, y);
 }
