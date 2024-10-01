@@ -36,9 +36,7 @@ int main() {
 
     CloseWindow();
 
-    free(snake);
-    free(food);
-    free(game);
+    free_game(game);
 
     return 0;
 }

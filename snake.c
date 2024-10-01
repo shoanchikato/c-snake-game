@@ -93,3 +93,13 @@ void snake_update(Snake *snake) {
     snake_get_direction(snake);
     snake_movement(snake);
 }
+
+void free_snake(Snake *snake) {
+  if(snake == NULL) return;
+
+  free(snake->body);
+  snake->body = NULL;
+
+  free(snake);
+  snake = NULL;
+}

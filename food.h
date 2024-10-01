@@ -20,4 +20,6 @@ void food_draw(Food* food);
 
 void food_update(Food* food);
 
+void free_food(Food *food);
+
 #endif

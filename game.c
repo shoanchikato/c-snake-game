@@ -38,3 +38,13 @@ void game_check_collision(Game *g) {
     g->snake->can_grow = true;
   }
 }
+
+void free_game(Game *game) {
+  if (game == NULL) return;
+
+  free_food(game->food);
+  free_snake(game->snake);
+  free(game);
+
+  game = NULL;
+}

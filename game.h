@@ -18,4 +18,6 @@ void game_draw(Game *g);
 
 void game_check_collision(Game *g);
 
+void free_game(Game *game);
+
 #endif

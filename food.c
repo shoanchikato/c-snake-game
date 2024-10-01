@@ -40,3 +40,10 @@ void food_update(Food* food) {
   Position *pos = get_random_pos_avoid_collision(food->snake_body, &food->snake_body_len);
   food->position = *pos;
 }
+
+void free_food(Food *food) {
+  if(food == NULL) return;
+
+  free(food);
+  food = NULL;
+}

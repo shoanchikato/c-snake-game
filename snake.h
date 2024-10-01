@@ -24,4 +24,6 @@ void snake_movment(Snake *snake);
 
 void snake_update(Snake *snake);
 
+void free_snake(Snake *snake);
+
 #endif
