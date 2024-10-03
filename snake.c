@@ -13,14 +13,10 @@ Snake *snake_init() {
   size_t body_len = 0;
   bool can_grow = false;
   Position *body = NULL;
-
-  Position position3 = *position_init(6, 9);
-  Position position2 = *position_init(5, 9);
-  Position position1 = *position_init(4, 9);
   
-  array_op_push_front((void**)&body, &body_len, &position1,  sizeof(Position*));
-  array_op_push_front((void**)&body, &body_len, &position2,  sizeof(Position*));
-  array_op_push_front((void**)&body, &body_len, &position3,  sizeof(Position*));
+  array_op_push_front((void**)&body, &body_len, position_init(6, 9),  sizeof(Position*));
+  array_op_push_front((void**)&body, &body_len, position_init(5, 9),  sizeof(Position*));
+  array_op_push_front((void**)&body, &body_len, position_init(4, 9),  sizeof(Position*));
 
   Position *direction = position_init(1, 0);
 
