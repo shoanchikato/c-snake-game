@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <sys/_types/_size_t.h>
 #include "include/array_op.h"
 
 Snake *snake_init() {
@@ -84,6 +85,24 @@ void snake_movement(Snake *snake) {
 void snake_update(Snake *snake) {
     snake_get_direction(snake);
     snake_movement(snake);
+}
+
+void snake_reset(Snake *snake) {
+  Position *body = NULL;
+  size_t body_len = 0;
+  
+  array_op_push_front((void**)&body, &body_len, position_init(6, 9),  sizeof(Position*));
+  array_op_push_front((void**)&body, &body_len, position_init(5, 9),  sizeof(Position*));
+  array_op_push_front((void**)&body, &body_len, position_init(4, 9),  sizeof(Position*));
+
+  Position *direction = position_init(1, 0);
+
+  Position *old = snake->body;
+  snake->body = body;
+  snake->body_len = body_len;
+  snake-> direction = *direction;
+  
+  free(old);
 }
 
 void free_snake(Snake *snake) {

@@ -26,6 +26,9 @@ int main() {
 
             // Update
             game_update(game);
+
+            // Restart game
+            game_restart(game);
             
             // Draw
             ClearBackground(GREEN_N);
