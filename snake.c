@@ -55,17 +55,13 @@ void snake_draw(Snake *snake) {
 
 void snake_get_direction(Snake *snake) {
   if (IsKeyPressed(KEY_UP) && snake->direction.y != 1) {
-    snake->direction.x = 0;
-    snake->direction.y = -1;
+    snake->direction = *position_init(0, -1);
   } else if (IsKeyPressed(KEY_DOWN) && snake->direction.y != -1) {
-    snake->direction.x = 0;
-    snake->direction.y = 1;
+    snake->direction = *position_init(0, 1);
   } else if (IsKeyPressed(KEY_LEFT) && snake->direction.x != 1) {
-    snake->direction.x = -1;
-    snake->direction.y = 0;
+    snake->direction = *position_init(-1, 0);
   } else if (IsKeyPressed(KEY_RIGHT) && snake->direction.x != -1) {
-    snake->direction.x = 1;
-    snake->direction.y = 0;
+    snake->direction = *position_init(1, 0);
   }
 }
 
