@@ -18,7 +18,7 @@ Snake *snake_init() {
   array_op_push_front((void**)&body, &body_len, position_init(5, 9),  sizeof(Position*));
   array_op_push_front((void**)&body, &body_len, position_init(4, 9),  sizeof(Position*));
 
-  Position *direction = position_init(1, 0);
+  Position direction = *position_init(1, 0);
 
   Snake *snake = (Snake*) calloc(1, sizeof(Snake));
   if(snake == NULL) {
@@ -30,7 +30,7 @@ Snake *snake_init() {
 
   snake->body = body;
   snake->body_len = body_len;
-  snake->direction = *direction;
+  snake->direction = direction;
   snake->can_grow = can_grow;
   snake->last_updated_time = last_updated_time;
 
@@ -94,12 +94,12 @@ void snake_reset(Snake *snake) {
   array_op_push_front((void**)&body, &body_len, position_init(5, 9),  sizeof(Position*));
   array_op_push_front((void**)&body, &body_len, position_init(4, 9),  sizeof(Position*));
 
-  Position *direction = position_init(1, 0);
+  Position direction = *position_init(1, 0);
 
   Position *old = snake->body;
   snake->body = body;
   snake->body_len = body_len;
-  snake-> direction = *direction;
+  snake-> direction = direction;
   
   free(old);
 }

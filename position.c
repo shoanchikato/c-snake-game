@@ -23,8 +23,8 @@ void position_print(Position* p) {
   }
 }
 
-bool position_equal(Position* a, Position* b) {
-  return a->x == b->x && a->y == b->y;
+bool position_equal(Position a, Position b) {
+  return a.x == b.x && a.y == b.y;
 }
 
 Position* position_add(Position* a, Position* b) {
