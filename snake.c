@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include <sys/_types/_size_t.h>
 #include "include/array_op.h"
 
 Snake *snake_init() {
