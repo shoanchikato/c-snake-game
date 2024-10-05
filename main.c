@@ -1,45 +1,48 @@
+#include "constants.h"
+#include "food.h"
 #include "game.h"
 #include "include/raylib.h"
 #include "position.h"
-#include <time.h>
+#include "snake.h"
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "constants.h"
-#include "snake.h"
-#include "food.h"
-#include <stdbool.h>
+#include <time.h>
+
+// This is a port from
+// https://github.com/educ8s/Cpp-Retro-Snake-Game-with-raylib
 
 int main() {
-    // Seed the random number generator
-    srand(time(NULL));
+  // Seed the random number generator
+  srand(time(NULL));
 
-    InitWindow(WIDTH, HEIGHT, "Retro Snake");
-    SetTargetFPS(30);
+  InitWindow(WIDTH, HEIGHT, "Retro Snake");
+  SetTargetFPS(30);
 
-    Snake *snake = snake_init();
-    Food *food = food_init(snake->body, &snake->body_len);
+  Snake *snake = snake_init();
+  Food *food = food_init(snake->body, &snake->body_len);
 
-    Game *game = game_init(snake, food);
+  Game *game = game_init(snake, food);
 
-    while (!WindowShouldClose()) {
-        BeginDrawing();
+  while (!WindowShouldClose()) {
+    BeginDrawing();
 
-            // Update
-            game_update(game);
+    // Update
+    game_update(game);
 
-            // Restart game
-            game_restart(game);
-            
-            // Draw
-            ClearBackground(GREEN_N);
-            game_draw(game);
+    // Restart game
+    game_restart(game);
 
-        EndDrawing();
-    }
+    // Draw
+    ClearBackground(GREEN_N);
+    game_draw(game);
 
-    CloseWindow();
+    EndDrawing();
+  }
 
-    free_game(game);
+  CloseWindow();
 
-    return 0;
+  free_game(game);
+
+  return 0;
 }
