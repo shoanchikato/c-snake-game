@@ -32,7 +32,7 @@ clean:
 	rm -rf ./bin/*
 
 run: build
-	./$(BIN)
+	$(BIN)
 
 debug:
 	gdb $(BIN)

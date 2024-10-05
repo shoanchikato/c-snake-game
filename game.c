@@ -1,4 +1,5 @@
 #include "constants.h"
+#include "include/array_op.h"
 #include "position.h"
 #include "food.h"
 #include "snake.h"
@@ -26,6 +27,7 @@ void game_update(Game *g) {
     snake_update(g->snake);
     game_check_collision(g);
     game_check_collision_with_edges(g);
+    game_check_collision_with_body(g);
   }
 }
 
@@ -56,6 +58,14 @@ void game_check_collision_with_edges(Game *g) {
   g->snake->body[0].y <= -1;
 
   if (collision_y) {
+    game_over(g);
+  }
+}
+
+void game_check_collision_with_body(Game *g) {
+  bool collision = element_in_body(g->snake->body[0], &g->snake->body[1], g->snake->body_len-1);
+
+  if (collision) {
     game_over(g);
   }
 }

@@ -17,10 +17,8 @@ Position *position_init(int x, int y) {
   return position;
 }
 
-void position_print(Position* p) {
-  if (p != NULL) {
-    printf("{x: %d, y:%d}\n", p->x, p->y);
-  }
+void position_print(Position p) {
+  printf("{x: %d, y:%d}\n", p.x, p.y);
 }
 
 bool position_equal(Position a, Position b) {
