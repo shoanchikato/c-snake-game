@@ -16,7 +16,10 @@ int main() {
   // Seed the random number generator
   srand(time(NULL));
 
-  InitWindow(WIDTH, HEIGHT, "Retro Snake");
+  InitWindow(
+    WIDTH + (2 * OFFSET), 
+    HEIGHT + (2 * OFFSET), 
+    "Retro Snake");
   SetTargetFPS(30);
 
   Snake *snake = snake_init();
@@ -35,6 +38,17 @@ int main() {
 
     // Draw
     ClearBackground(GREEN_N);
+    Rectangle rect = {
+      (float) OFFSET-5,
+      (float) OFFSET-5,
+      (float) WIDTH+10,
+      (float) HEIGHT+10,
+    };
+    DrawRectangleLinesEx(
+      rect, 
+      5, 
+      DARKGREEN_N
+    );
     game_draw(game);
 
     EndDrawing();

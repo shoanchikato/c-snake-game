@@ -65,8 +65,8 @@ Position *get_random_pos_avoid_collision(Position *body, const size_t *len) {
 Texture2D get_texture(const char *file_path) {
   Image image = LoadImage(file_path);
 
-  int width = image.width / RESIZERATIO;
-  int height = image.height / RESIZERATIO;
+  int width = image.width / RESIZE_RATIO;
+  int height = image.height / RESIZE_RATIO;
   ImageResize(&image, width, height);
 
   Texture2D texture = LoadTextureFromImage(image);

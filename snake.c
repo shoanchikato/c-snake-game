@@ -41,8 +41,8 @@ void snake_draw(Snake *snake) {
   for(size_t i = 0; i < snake->body_len; i++) {
     DrawRectangleRounded(
       (Rectangle) {
-        snake->body[i].x*CELLSIZE,
-        snake->body[i].y*CELLSIZE,
+        OFFSET + snake->body[i].x*CELLSIZE,
+        OFFSET + snake->body[i].y*CELLSIZE,
         CELLSIZE,
         CELLSIZE
       }, 

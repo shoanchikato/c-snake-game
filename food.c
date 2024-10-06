@@ -30,8 +30,8 @@ Food* food_init(Position *snake_body, size_t *len) {
 void food_draw(Food* food) {
   DrawTexture(
     food->texture,
-    food->position.x*CELLSIZE,
-    food->position.y*CELLSIZE,
+    OFFSET + food->position.x*CELLSIZE,
+    OFFSET + food->position.y*CELLSIZE,
     WHITE
   );
 }
