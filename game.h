@@ -21,7 +21,7 @@ void game_update(Game *g);
 
 void game_draw(Game *g);
 
-void game_check_collision(Game *g);
+void game_check_collision_food(Game *g);
 
 void game_check_collision_with_edges(Game *g);
 

@@ -31,7 +31,7 @@ Game *game_init(Snake *snake, Food *food) {
 void game_update(Game *g) {
   if (g->running) {
     snake_update(g->snake);
-    game_check_collision(g);
+    game_check_collision_food(g);
     game_check_collision_with_edges(g);
     game_check_collision_with_body(g);
   }
@@ -42,7 +42,7 @@ void game_draw(Game *g) {
   food_draw(g->food);
 }
 
-void game_check_collision(Game *g) {
+void game_check_collision_food(Game *g) {
   Position a = g->snake->body[0];
   Position b = g->food->position;
   if (position_equal(a, b)) {
