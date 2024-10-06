@@ -4,12 +4,15 @@
 #include "position.h"
 #include "food.h"
 #include "snake.h"
+#include "include/raylib.h"
 
 typedef struct {
   Snake *snake;
   Food *food;
   bool running;
   int score;
+  Sound eat_sound;
+  Sound wall_sound;
 } Game;
 
 Game *game_init(Snake *snake, Food *food);
