@@ -49,6 +49,13 @@ int main() {
       5, 
       DARKGREEN_N
     );
+    DrawText(
+      "Retro Snake",
+      OFFSET-5,
+      20,
+      40,
+      DARKGREEN_N
+    );
     game_draw(game);
 
     EndDrawing();
