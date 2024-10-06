@@ -3,15 +3,19 @@
 
 #include "include/raylib.h"
 
-#define OFFSET (75 * RESIZE_RATIO)
+#define OFFSET (75 / RESIZE_RATIO)
 
-#define CELLSIZE (30 * RESIZE_RATIO)
+#define CELLSIZE (30 / RESIZE_RATIO)
 #define CELLCOUNT 25
 
 #define HEIGHT (CELLSIZE * CELLCOUNT)
 #define WIDTH (CELLSIZE * CELLCOUNT)
 
 #define RESIZE_RATIO 1
+
+#define FONT_SIZE (40 / RESIZE_RATIO)
+#define BORDER_THICKNESS (5 / RESIZE_RATIO)
+#define GAME_TITLE_Y (20 / RESIZE_RATIO)
 
 #define GREEN_N CLITERAL(Color){174, 204, 96, 255}
 #define DARKGREEN_N CLITERAL(Color){43, 51, 24, 255}

@@ -18,6 +18,7 @@ Game *game_init(Snake *snake, Food *food) {
   game->food = food;
   game->snake = snake;
   game->running = true;
+  game->score = 0;
 
   return game;
 }
@@ -43,6 +44,7 @@ void game_check_collision(Game *g) {
     Position *pos = get_random_pos_avoid_collision(g->snake->body, &g->snake->body_len);
     g->food->position = *pos;
     g->snake->can_grow = true;
+    g->score++;
   }
 }
 
@@ -90,6 +92,7 @@ void game_over(Game *g) {
   snake_reset(g->snake);
   g->food->position = *get_random_pos_avoid_collision(g->snake->body, &g->snake->body_len);
   g->running = false;
+  g->score = 0;
 }
 
 void free_game(Game *game) {

@@ -9,6 +9,7 @@ typedef struct {
   Snake *snake;
   Food *food;
   bool running;
+  int score;
 } Game;
 
 Game *game_init(Snake *snake, Food *food);
