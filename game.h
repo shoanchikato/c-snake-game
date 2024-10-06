@@ -27,6 +27,8 @@ void game_check_collision_with_edges(Game *g);
 
 void game_check_collision_with_body(Game *g);
 
+void game_reset(Game *g);
+
 void game_restart(Game *g);
 
 void game_over(Game *g);

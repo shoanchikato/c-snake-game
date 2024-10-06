@@ -79,26 +79,32 @@ void game_check_collision_with_body(Game *g) {
 }
 
 void game_restart(Game *g) {
-  if (IsKeyPressed(KEY_UP) && g->snake->direction.y != 1) {
-    g->snake->direction = *position_init(0, -1);
-    g->running = true;
-  } else if (IsKeyPressed(KEY_DOWN) && g->snake->direction.y != -1) {
-    g->snake->direction = *position_init(0, 1);
-    g->running = true;
-  } else if (IsKeyPressed(KEY_LEFT) && g->snake->direction.x != 1) {
-    g->snake->direction = *position_init(-1, 0);
-    g->running = true;
-  } else if (IsKeyPressed(KEY_RIGHT) && g->snake->direction.x != -1) {
-    g->snake->direction = *position_init(1, 0);
-    g->running = true;
+  if (!g->running) {
+    if (IsKeyPressed(KEY_UP) && g->snake->direction.y != 1) {
+      g->snake->direction = *position_init(0, -1);
+      game_reset(g);
+    } else if (IsKeyPressed(KEY_DOWN) && g->snake->direction.y != -1) {
+      g->snake->direction = *position_init(0, 1);
+      game_reset(g);
+    } else if (IsKeyPressed(KEY_LEFT) && g->snake->direction.x != 1) {
+      g->snake->direction = *position_init(-1, 0);
+      game_reset(g);
+    } else if (IsKeyPressed(KEY_RIGHT) && g->snake->direction.x != -1) {
+      g->snake->direction = *position_init(1, 0);
+      game_reset(g);
+    }
   }
 }
 
-void game_over(Game *g) {
+void game_reset(Game *g) {
   snake_reset(g->snake);
   g->food->position = *get_random_pos_avoid_collision(g->snake->body, &g->snake->body_len);
-  g->running = false;
   g->score = 0;
+  g->running = true;
+}
+
+void game_over(Game *g) {
+  g->running = false;
   PlaySound(g->wall_sound);
 }
 
