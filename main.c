@@ -39,14 +39,13 @@ int main() {
 
     // Draw
     ClearBackground(GREEN_N);
-    Rectangle rect = {
-      (float) OFFSET-5,
-      (float) OFFSET-5,
-      (float) WIDTH+10,
-      (float) HEIGHT+10,
-    };
     DrawRectangleLinesEx(
-      rect, 
+      (Rectangle) {
+        (float) OFFSET-5,
+        (float) OFFSET-5,
+        (float) WIDTH+10,
+        (float) HEIGHT+10,
+      }, 
       (float) BORDER_THICKNESS, 
       DARKGREEN_N
     );
