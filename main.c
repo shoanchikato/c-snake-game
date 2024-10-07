@@ -41,25 +41,25 @@ int main() {
     ClearBackground(GREEN_N);
     DrawRectangleLinesEx(
       (Rectangle) {
-        (float) OFFSET-5,
-        (float) OFFSET-5,
-        (float) WIDTH+10,
-        (float) HEIGHT+10,
+        (float) OFFSET - 5,
+        (float) OFFSET - 5,
+        (float) WIDTH + 10,
+        (float) HEIGHT + 10,
       }, 
       (float) BORDER_THICKNESS, 
       DARKGREEN_N
     );
     DrawText(
       "Retro Snake",
-      OFFSET-5,
+      OFFSET - 5,
       GAME_TITLE_Y,
       FONT_SIZE,
       DARKGREEN_N
     );
     DrawText(
       TextFormat("%i", game->score),
-      OFFSET-5,
-      OFFSET+HEIGHT+10,
+      OFFSET - 5,
+      OFFSET + HEIGHT + 10,
       FONT_SIZE,
       DARKGREEN_N
     );

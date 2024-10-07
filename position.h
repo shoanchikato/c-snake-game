@@ -2,7 +2,6 @@
 #define POSITION_H
 
 #include <stdbool.h>
-#include <stddef.h>
 
 typedef struct {
   int x;
@@ -11,7 +10,7 @@ typedef struct {
 
 Position *position_init(int x, int y);
 
-Position *position_add(Position* a, Position* b);
+Position *position_add(Position *a, Position *b);
 
 bool position_equal(Position a, Position b);
 

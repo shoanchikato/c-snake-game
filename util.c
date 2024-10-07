@@ -1,6 +1,5 @@
 #include "constants.h"
 #include "include/raylib.h"
-#include "include/raymath.h"
 #include "position.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,28 +17,28 @@ bool element_in_body(Position element, Position *body, size_t len) {
 }
 
 bool event_triggered(float seconds, clock_t *last_update_time) {
-    // Get the current time
-    clock_t current_time = clock();
+  // Get the current time
+  clock_t current_time = clock();
 
-    // Convert the seconds into clock ticks
-    clock_t interval = (clock_t)(seconds * CLOCKS_PER_SEC);
+  // Convert the seconds into clock ticks
+  clock_t interval = (clock_t)(seconds * CLOCKS_PER_SEC);
 
-    // Calculate the time when the event should trigger
-    clock_t time_spent = *last_update_time + interval;
+  // Calculate the time when the event should trigger
+  clock_t time_spent = *last_update_time + interval;
 
-    // Check if the current time is after the calculated time
-    if (current_time > time_spent) {
-        // Update the last update time to current time
-        *last_update_time = current_time;
-        return true;
-    }
+  // Check if the current time is after the calculated time
+  if (current_time > time_spent) {
+    // Update the last update time to current time
+    *last_update_time = current_time;
+    return true;
+  }
 
-    return false;
+  return false;
 }
 
 Position *get_random_pos() {
-  int x = (int) random_between(0, CELLCOUNT - 1);
-  int y = (int) random_between(0, CELLCOUNT - 1);
+  int x = (int)random_between(0, CELLCOUNT - 1);
+  int y = (int)random_between(0, CELLCOUNT - 1);
 
   return position_init(x, y);
 }
@@ -76,5 +75,5 @@ Texture2D get_texture(const char *file_path) {
 }
 
 int random_between(int min, int max) {
-    return min + rand() % (max - min + 1);
+  return min + rand() % (max - min + 1);
 }

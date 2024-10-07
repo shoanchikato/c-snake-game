@@ -1,5 +1,6 @@
-#include "position.h"
+#include "include/array_op.h"
 #include "include/raylib.h"
+#include "position.h"
 #include "snake.h"
 #include "constants.h"
 #include "util.h"
@@ -7,22 +8,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "include/array_op.h"
 
 Snake *snake_init() {
   size_t body_len = 0;
   bool can_grow = false;
   Position *body = NULL;
   
-  array_op_insert((void**)&body, &body_len, position_init(6, 9),  sizeof(Position*));
-  array_op_insert((void**)&body, &body_len, position_init(5, 9),  sizeof(Position*));
-  array_op_insert((void**)&body, &body_len, position_init(4, 9),  sizeof(Position*));
+  array_op_insert((void **)&body, &body_len, position_init(6, 9),  sizeof(Position *));
+  array_op_insert((void **)&body, &body_len, position_init(5, 9),  sizeof(Position *));
+  array_op_insert((void **)&body, &body_len, position_init(4, 9),  sizeof(Position *));
 
   Position direction = *position_init(1, 0);
 
-  Snake *snake = (Snake*) calloc(1, sizeof(Snake));
+  Snake *snake = (Snake *)calloc(1, sizeof(Snake));
   if(snake == NULL) {
-    printf("Error allocating memory for snake");
+    printf("error allocating memory for snake\n");
     exit(1);
   }
 
@@ -41,8 +41,8 @@ void snake_draw(Snake *snake) {
   for(size_t i = 0; i < snake->body_len; i++) {
     DrawRectangleRounded(
       (Rectangle) {
-        OFFSET + snake->body[i].x*CELLSIZE,
-        OFFSET + snake->body[i].y*CELLSIZE,
+        OFFSET + snake->body[i].x * CELLSIZE,
+        OFFSET + snake->body[i].y * CELLSIZE,
         CELLSIZE,
         CELLSIZE
       }, 
@@ -70,14 +70,14 @@ void snake_movement(Snake *snake) {
   if (event_triggered(SNAKESPEED, &snake->last_updated_time)) {
     Position cell = *position_add(&snake->body[0], &snake->direction);
 
-    array_op_push_front((void**)&snake->body,  &snake->body_len, &cell, sizeof(Position*));
+    array_op_push_front((void**)&snake->body,  &snake->body_len, &cell, sizeof(Position *));
 
     if (snake->can_grow) {
       snake->can_grow = false;
       return;
     }
 
-    array_op_pop_back((void**)&snake->body, &snake->body_len, sizeof(Position*));
+    array_op_pop_back((void **)&snake->body, &snake->body_len, sizeof(Position *));
   }
 }
 
@@ -90,9 +90,9 @@ void snake_reset(Snake *snake) {
   Position *body = NULL;
   size_t body_len = 0;
   
-  array_op_insert((void**)&body, &body_len, position_init(6, 9),  sizeof(Position*));
-  array_op_insert((void**)&body, &body_len, position_init(5, 9),  sizeof(Position*));
-  array_op_insert((void**)&body, &body_len, position_init(4, 9),  sizeof(Position*));
+  array_op_insert((void **)&body, &body_len, position_init(6, 9),  sizeof(Position *));
+  array_op_insert((void **)&body, &body_len, position_init(5, 9),  sizeof(Position *));
+  array_op_insert((void **)&body, &body_len, position_init(4, 9),  sizeof(Position *));
 
   Position direction = *position_init(1, 0);
 

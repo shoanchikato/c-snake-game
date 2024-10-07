@@ -14,7 +14,7 @@ Food* food_init(Position *snake_body, size_t *len) {
     // Allocate memory for the Food structure
     Food* food = (Food*) calloc(1, sizeof(Food));
     if(food == NULL) {
-        printf("Error allocating memory for food\n");
+        printf("error allocating memory for food\n");
         exit(1);
     }
 
@@ -30,14 +30,17 @@ Food* food_init(Position *snake_body, size_t *len) {
 void food_draw(Food* food) {
   DrawTexture(
     food->texture,
-    OFFSET + food->position.x*CELLSIZE,
-    OFFSET + food->position.y*CELLSIZE,
+    OFFSET + food->position.x * CELLSIZE,
+    OFFSET + food->position.y * CELLSIZE,
     WHITE
   );
 }
 
 void food_update(Food* food) {
-  Position *pos = get_random_pos_avoid_collision(food->snake_body, &food->snake_body_len);
+  Position *pos = get_random_pos_avoid_collision(
+    food->snake_body, 
+    &food->snake_body_len
+  );
   food->position = *pos;
 }
 

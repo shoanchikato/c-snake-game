@@ -5,9 +5,9 @@
 #include <string.h>
 
 Position *position_init(int x, int y) {
-  Position* position = (Position*) malloc(sizeof(Position));
+  Position *position = (Position*) malloc(sizeof(Position));
   if(position == NULL) {
-    printf("Error allocating memory for position\n");
+    printf("error allocating memory for position\n");
     exit(1);
   }
   
@@ -25,10 +25,10 @@ bool position_equal(Position a, Position b) {
   return a.x == b.x && a.y == b.y;
 }
 
-Position* position_add(Position* a, Position* b) {
+Position* position_add(Position *a, Position *b) {
   Position* p = (Position*) malloc(sizeof(Position));
   if(p == NULL) {
-    printf("Error allocating memory for position");
+    printf("error allocating memory for position\n");
     exit(1);
   }
   

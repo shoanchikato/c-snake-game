@@ -1,11 +1,10 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
-#include "include/raylib.h"
 #include "position.h"
 #include <stdbool.h>
-#include <stdlib.h>
 #include <time.h>
+
 typedef struct {
   Position *body;
   size_t body_len;

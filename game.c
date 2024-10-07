@@ -10,9 +10,9 @@
 #include <stdio.h>
 
 Game *game_init(Snake *snake, Food *food) {
-  Game *game = (Game*) calloc(1, sizeof(Game));
+  Game *game = (Game *)calloc(1, sizeof(Game));
   if(game == NULL) {
-    printf("Error allocating memory for game");
+    printf("error allocating memory for game\n");
     exit(1);
   }
 
@@ -71,7 +71,7 @@ void game_check_collision_with_edges(Game *g) {
 }
 
 void game_check_collision_with_body(Game *g) {
-  bool collision = element_in_body(g->snake->body[0], &g->snake->body[1], g->snake->body_len-1);
+  bool collision = element_in_body(g->snake->body[0], &g->snake->body[1], g->snake->body_len - 1);
 
   if (collision) {
     game_over(g);
@@ -98,7 +98,10 @@ void game_restart(Game *g) {
 
 void game_reset(Game *g) {
   snake_reset(g->snake);
-  g->food->position = *get_random_pos_avoid_collision(g->snake->body, &g->snake->body_len);
+  g->food->position = *get_random_pos_avoid_collision(
+    g->snake->body, 
+    &g->snake->body_len
+  );
   g->score = 0;
   g->running = true;
 }
