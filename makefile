@@ -12,7 +12,7 @@ ASAN = address,undefined,bounds,alignment,null,shift,signed-integer-overflow,obj
 
 # Frameworks and Libraries
 FRAMEWORKS = -framework CoreVideo -framework IOKit -framework Cocoa -framework GLUT -framework OpenGL
-LDFLAGS = -L./lib -lraylib 
+LDFLAGS = -L./lib -lraylib -larray_op
 
 # Directories and Files
 BIN = ./bin/app
